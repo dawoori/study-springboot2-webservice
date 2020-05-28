@@ -12,6 +12,9 @@ cache:
     - '$HOME/.m2/repository'
     - '$HOME/.gradle'
 
+before_install:
+  - chmod +x gradlew
+
 script: "./gradlew clean build"
 
 before_deploy:
@@ -22,7 +25,6 @@ before_deploy:
   - cd before-deploy && zip -r before-deploy * # before-deploy로 이동 후 전체 압축
   - cd ../ && mkdir -p deploy
   - mv before-deploy/before-deploy.zip deploy/study-springboot2-webservice.zip
-  - chmod +x gradlew
 
 deploy:
   - provider: s3
